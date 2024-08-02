@@ -14,8 +14,7 @@ int main(void)
    int spaces = height - 1;
 
    // Pyramide wird erstellt
-   for(int i = 0; i < height; i++)
-   {
+   for(int i = 0; i < height; i++){
 
     //Loop um die Spaces für die linksseitige Pyramide zu generieren
     for(int j = 0; j <= spaces; j++)   

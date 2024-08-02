@@ -8,7 +8,7 @@ int main(void){
     printf("Number: ");
     scanf("%lld", &cardNumberInt);
 
-    long long int length = floor(log10(llabs(cardNumberInt))) + 1;
+    int length = floor(log10(llabs(cardNumberInt))) + 1;
 
     if(length < 13 || length > 16 || length == 14){
         printf("INVALID");
@@ -58,4 +58,5 @@ int main(void){
     }
 
     printf("\n");
+    
 }

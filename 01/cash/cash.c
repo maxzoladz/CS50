@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(void){
+int main(void) {
 
     int change;
     int coinCounter = 0;
@@ -38,4 +38,5 @@ int main(void){
 
     printf("%i", coinCounter);
     printf("\n");
+    
 }
