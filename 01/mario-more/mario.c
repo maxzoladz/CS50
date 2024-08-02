@@ -2,20 +2,43 @@
 
 int main(void)
 {
-   int n;
-   
+   int height;
+
+   //Frage nach einem int Wert für die Höhe der Pyramide
    do
    {
     printf("Enter Height: ");
-    scanf("%i", &n);
-   } while (n < 1);
+    scanf("%i", &height);
+   } while (height < 1 || height > 8);
 
-   for(int i = 0; i < n; i++)
+   int spaces = height - 1;
+
+   // Pyramide wird erstellt
+   for(int i = 0; i < height; i++)
    {
-    for(int j = 0; j < i + 1; j++)
+
+    //Loop um die Spaces für die linksseitige Pyramide zu generieren
+    for(int j = 0; j <= spaces; j++)   
+    {
+        printf(" ");
+    }
+    
+    spaces--;
+
+    // Loop für linksseitige Pyramide
+    for(int k = 0; k < i + 1; k++)
+    {
+        printf("#");
+    }
+
+    // Space zwischen beiden Pyramiden
+    printf("  "); 
+
+    // Loop für rechtsseitige Pyramide
+    for(int m = 0; m < i + 1; m++)
     {
         printf("#");
     }
     printf("\n");
-   } 
+   }
 }
