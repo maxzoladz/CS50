@@ -9,7 +9,7 @@ char rotate(char c, int n);
 
 int main(int argc, char *argv[]) {
 
-    if(argc < 1 || argc > 2 || !only_digits(argv[1])) {
+    if(argc != 2 || !only_digits(argv[1])) {
         printf("Usage: ./caesar key\n");
         return 1;
     }
