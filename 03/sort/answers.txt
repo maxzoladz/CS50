@@ -1,0 +1,11 @@
+sort1 uses: Bubble Sort
+
+How do you know?: Worst case: O(n2), best case: Omega(n).
+
+sort2 uses: Merge Sort
+
+How do you know?: Worst case: O(n*log(n)), best case: Omega(n*log(n)).
+
+sort3 uses: Selection Sort
+
+How do you know?: Worst case: O(n2), best case: Omega(n2).
