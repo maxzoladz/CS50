@@ -7,7 +7,7 @@ bool keyChecker(char c[]);
 int main(int argc, char *argv[]) {
 
     if(argc != 2) {
-        printf("Usage: ./caesar key\n");
+        printf("Usage: ./substitution key\n");
         return 1;
     }
     else if(strlen(argv[1]) != 26){
@@ -57,5 +57,4 @@ bool keyChecker(char c[]) {
     }
 
     return true;
-
 }

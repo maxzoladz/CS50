@@ -19,7 +19,7 @@ int main(void) {
     int words = countWords(text);
     int sentences = countSentences(text);
 
-    int index = roundf(0.0588 * (((float) letters / (float) words) * 100.0) - 0.296 * (((float) sentences / (float) words) * 100.0) - 15.8);
+    int gradeLevel = roundf(0.0588 * (((float) letters / (float) words) * 100.0) - 0.296 * (((float) sentences / (float) words) * 100.0) - 15.8);
 
     if(index >= 16) {
         printf("Grade 16+\n");
@@ -35,11 +35,13 @@ int main(void) {
 
 int countLetters(char text[]) {
 
-    int length = strlen(text);
+    int textLength = strlen(text);
     int count = 0;
 
-    for(int i = 0; i < length; i++) {
-        if((text[i] >= 'A' && text[i] <= 'Z') || (text[i] >= 'a'&& text[i]<= 'z')) {
+    for(int textIndex = 0; textIndex < textLength; textIndex++) {
+        bool characterIsAlphabetical = (text[textIndex] >= 'A' && text[textIndex] <= 'Z') || (text[textIndex] >= 'a'&& text[textIndex] <= 'z');
+
+        if(characterIsAlphabetical) {
             count++;
         }
     }
