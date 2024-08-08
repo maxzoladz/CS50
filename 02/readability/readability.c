@@ -61,8 +61,6 @@ int countWords(char text[]) {
         if(characterIsSpace) count++;
     }
 
-    if(count == 0) count++;
-
     return count += 1;
 }
 
