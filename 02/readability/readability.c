@@ -21,14 +21,14 @@ int main(void) {
 
     int gradeLevel = roundf(0.0588 * (((float) letters / (float) words) * 100.0) - 0.296 * (((float) sentences / (float) words) * 100.0) - 15.8);
 
-    if(index >= 16) {
+    if(gradeLevel >= 16) {
         printf("Grade 16+\n");
     }
-    else if(index < 1) {
+    else if(gradeLevel < 1) {
         printf("Before Grade 1\n");
     }
     else {
-        printf("Grade %i\n", index);
+        printf("Grade %i\n", gradeLevel);
     }
 
 }
@@ -61,7 +61,7 @@ int countWords(char text[]) {
         if(characterIsSpace) count++;
     }
 
-    return count += 1;
+    return count++;
 }
 
 int countSentences(char text[]) {
