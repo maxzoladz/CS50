@@ -47,16 +47,12 @@ bool keyChecker(char c[]) {
     int len = strlen(c);
 
     for(int i = 0; i < len; i++) {
-        if(!((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z'))) {
-            return false;
-        }
+        if(!((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z'))) return false;
     }
 
     for(int j = 0; j < len; j++) {
         for(int k = j + 1; k < len; k++) {
-            if(c[j] == c[k]) {
-                return false;
-            }
+            if(c[j] == c[k]) return false;
         }
     }
 

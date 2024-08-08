@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdbool.h>
 
 int countLetters(char text[]);
 int countWords(char text[]);
@@ -42,40 +43,42 @@ int countLetters(char text[]) {
             count++;
         }
     }
-    return count;
 
+    return count;
 }
 
 int countWords(char text[]) {
 
-    int length = strlen(text);
+    int textLength = strlen(text);
     int count = 0;
 
-    for(int i = 0; i < length; i++) {
-        if(text[i] == 32) {
-            count++;
-        }
+    for(int textIndex = 0; textIndex < textLength; textIndex++) {
+        
+        bool characterIsSpace = text[textIndex] == ' ';
+
+        if(characterIsSpace) count++;
     }
 
-    if(count == 0) {
-        count++;
-    }
+    if(count == 0) count++;
 
     return count += 1;
-
 }
 
 int countSentences(char text[]) {
 
-    int length = strlen(text);
+    int textLength = strlen(text);
     int count = 0;
 
-    for(int i = 0; i< length; i++) {
-        if(text[i] == 33 || text[i] == 63 || text[i] == 46) {
+    for(int textIndex = 0; textIndex< textLength; textIndex++) {
+
+        bool characterIsExclamationMark = text[textIndex] == '!';
+        bool characterIsQuestionMark = text[textIndex] == '?';
+        bool characterIsPeriod = text[textIndex] == '.';
+
+        if(characterIsExclamationMark || characterIsQuestionMark || characterIsPeriod) {
             count++;
         }
     }
 
     return count;
-
 }

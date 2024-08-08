@@ -24,38 +24,34 @@ int main(void) {
     int score1 = score(firstWord);
     int score2 = score(secondWord);
 
-    if(score1 > score2) {
-        printf("Player 1 wins!\n");
-    }
-    else if(score1 < score2) {
-        printf("Player 2 wins!\n");
-    }
-    else {
-        printf("Tie!\n");
-    }
+    if(score1 > score2) printf("Player 1 wins!\n");
+
+    else if(score1 < score2) printf("Player 2 wins!\n");
+        
+    else printf("Tie!\n");
 
 }
 
-int toUpper(char s[]) {
+int toUpper(char word[]) {
 
-    int length = strlen(s);
+    int wordLength = strlen(word);
 
-    for(int i = 0; i < length; i++) {
+    for(int wordIndex = 0; wordIndex < wordLength; wordIndex++) {
         
-        if(s[i] >= 'a') {
-            s[i] = s[i] - 32;
-        }
+        if(word[wordIndex] >= 'a') word[wordIndex] = word[wordIndex] - 32;
     }
+    
     return 0;
 }
 
 int score(char word[]) {
 
-    int length = strlen(word);
+    int wordLength = strlen(word);
     int score = 0;
 
-    for(int i = 0; i < length; i++) {
-       score = score + points[word[i] - 'A'];
+    for(int wordIndex = 0; wordIndex < wordLength; wordIndex++) {
+        score = score + points[word[wordIndex] - 'A'];
     }
+
     return score; 
 }

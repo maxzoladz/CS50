@@ -40,20 +40,18 @@ bool only_digits(char c[]) {
     bool answer = false;
 
     for(int i = 0; i < length; i++) {
-        if(isdigit(c[i])) {
-            answer = true;
-        }
-        else {
-            answer = false;
-        }
+        if(isdigit(c[i])) answer = true; 
+        
+        else answer = false;
+
     }
     return answer;
 }
 
 char rotate(char c, int n) {
 
-    while(n >= 25){
-        n -= 25;
+    while(n >= 26){
+        n -= 26;
     }
 
     if((c >= 'A' && c <= 'Z' && c + n > 'Z') || (c >= 'a' && c <= 'z' && c + n > 'z')) {
