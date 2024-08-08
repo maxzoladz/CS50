@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-bool only_digits(char c[]);
-char rotate(char c, int n);
+bool only_digits(char text[]);
+char rotate(char c, int rotationFactor);
 
 int main(int argc, char *argv[]) {
 
@@ -21,10 +21,10 @@ int main(int argc, char *argv[]) {
         printf("Text: ");
         fgets(text, sizeof(text), stdin);
 
-        int len = strlen(text);
+        int textLength = strlen(text);
 
-        for(int i = 0; i < len; i++) {
-            text[i] = rotate(text[i], value);
+        for(int textIndex = 0; textIndex < textLength; textIndex++) {
+            text[textIndex] = rotate(text[textIndex], value);
         }
 
         printf("Ciphertext: %s\n", text);
@@ -34,13 +34,13 @@ int main(int argc, char *argv[]) {
 
 }
 
-bool only_digits(char c[]) {
+bool only_digits(char text[]) {
     
-    int length = strlen(c);
+    int textLength = strlen(text);
     bool answer = false;
 
-    for(int i = 0; i < length; i++) {
-        if(isdigit(c[i])) answer = true; 
+    for(int textIndex = 0; textIndex < textLength; textIndex++) {
+        if(isdigit(text[textIndex])) answer = true; 
         
         else answer = false;
 
@@ -48,17 +48,20 @@ bool only_digits(char c[]) {
     return answer;
 }
 
-char rotate(char c, int n) {
+char rotate(char c, int rotationFactor) {
 
-    while(n >= 26){
-        n -= 26;
+    while(rotationFactor >= 26){
+        rotationFactor -= 26;
     }
 
-    if((c >= 'A' && c <= 'Z' && c + n > 'Z') || (c >= 'a' && c <= 'z' && c + n > 'z')) {
-        return c - n;
+    bool isUpperAlphabetical = c >= 'A' && c <= 'Z';
+    bool isLowerAlphabetical = c >= 'a' && c <= 'z';
+
+    if((isUpperAlphabetical && c + rotationFactor > 'Z') || (isLowerAlphabetical && c + rotationFactor > 'z')) {
+        return c - rotationFactor;
     }
-    else if((c >= 'A' && c <= 'Z' && c + n < 'Z') || (c >= 'a' && c <= 'z' && c + n < 'z')) {
-        return c = c + n;
+    else if((isUpperAlphabetical && c + rotationFactor < 'Z') || (isLowerAlphabetical && c + rotationFactor < 'z')) {
+        return c = c + rotationFactor;
     }
     else {
         return c;

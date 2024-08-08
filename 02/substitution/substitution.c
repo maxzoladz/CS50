@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-bool keyChecker(char c[]);
+bool keyChecker(char key[]);
 
 int main(int argc, char *argv[]) {
 
@@ -24,14 +24,18 @@ int main(int argc, char *argv[]) {
         printf("Plaintext: ");
         fgets(text, sizeof(text), stdin);
 
-        int len = strlen(text);
+        int textLength = strlen(text);
 
-        for(int i = 0; i < len; i++) {
-            if(text[i] >= 'a' && text[i] <= 'z') {
-                text[i] = (argv[1][text[i] - 'a'] + 32);
+        for(int textIndex = 0; textIndex < textLength; textIndex++) {
+
+            bool isLowerAlphabetical = text[textIndex] >= 'a' && text[textIndex] <= 'z';
+            bool isUpperAlphabetical = text[textIndex] >= 'A' && text[textIndex] <= 'Z';
+
+            if(isLowerAlphabetical) {
+                text[textIndex] = (argv[1][text[textIndex] - 'a'] + 32);
             }
-            else if(text[i] >= 'A' && text[i] <= 'Z') {
-                text[i] = argv[1][text[i] - 'A'];
+            else if(isUpperAlphabetical) {
+                text[textIndex] = argv[1][text[textIndex] - 'A'];
             }
         }
 
@@ -42,17 +46,21 @@ int main(int argc, char *argv[]) {
     
 }
 
-bool keyChecker(char c[]) {
+bool keyChecker(char key[]) {
     
-    int len = strlen(c);
+    int keyLength = strlen(key);
 
-    for(int i = 0; i < len; i++) {
-        if(!((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z'))) return false;
+    for(int keyIndex = 0; keyIndex < keyLength; keyIndex++) {
+
+        bool isAlphabetical = (key[keyIndex] >= 'a' && key[keyIndex] <= 'z') || (key[keyIndex] >= 'A' && key[keyIndex] <= 'Z');
+        if(!(isAlphabetical)) return false;
     }
 
-    for(int j = 0; j < len; j++) {
-        for(int k = j + 1; k < len; k++) {
-            if(c[j] == c[k]) return false;
+    for(int keyIndex = 0; keyIndex < keyLength; keyIndex++) {
+        for(int nextKeyIndex = keyIndex + 1; nextKeyIndex < keyLength; nextKeyIndex++) {
+
+            bool charIsDuplicate = key[keyIndex] == key[nextKeyIndex];
+            if(charIsDuplicate) return false;
         }
     }
 
