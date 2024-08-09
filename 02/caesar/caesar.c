@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 bool only_digits(char text[]);
-char rotate(char c, int rotationFactor);
+char rotate(char letter, int rotationFactor);
 
 int main(int argc, char *argv[]) {
 
@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     }
     else {
         
-        int value = atoi(argv[1]);
+        int shiftValue = atoi(argv[1]);
         char text[100];
 
         printf("Text: ");
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
         int textLength = strlen(text);
 
         for(int textIndex = 0; textIndex < textLength; textIndex++) {
-            text[textIndex] = rotate(text[textIndex], value);
+            text[textIndex] = rotate(text[textIndex], shiftValue);
         }
 
         printf("Ciphertext: %s\n", text);
@@ -40,31 +40,28 @@ bool only_digits(char text[]) {
     bool answer = false;
 
     for(int textIndex = 0; textIndex < textLength; textIndex++) {
-        if(isdigit(text[textIndex])) answer = true; 
-        
-        else answer = false;
-
+        if(!isdigit(text[textIndex])) return false; 
     }
-    return answer;
+    return true;
 }
 
-char rotate(char c, int rotationFactor) {
+char rotate(char letter, int rotationFactor) {
 
     while(rotationFactor >= 26){
         rotationFactor -= 26;
     }
 
-    bool isUpperAlphabetical = c >= 'A' && c <= 'Z';
-    bool isLowerAlphabetical = c >= 'a' && c <= 'z';
+    bool isUpperAlphabetical = letter >= 'A' && letter <= 'Z';
+    bool isLowerAlphabetical = letter >= 'a' && letter <= 'z';
 
-    if((isUpperAlphabetical && c + rotationFactor > 'Z') || (isLowerAlphabetical && c + rotationFactor > 'z')) {
-        return c - rotationFactor;
+    if((isUpperAlphabetical && letter + rotationFactor > 'Z') || (isLowerAlphabetical && letter + rotationFactor > 'z')) {
+        return letter - rotationFactor;
     }
-    else if((isUpperAlphabetical && c + rotationFactor < 'Z') || (isLowerAlphabetical && c + rotationFactor < 'z')) {
-        return c = c + rotationFactor;
+    else if((isUpperAlphabetical && letter + rotationFactor < 'Z') || (isLowerAlphabetical && letter + rotationFactor < 'z')) {
+        return letter = letter + rotationFactor;
     }
     else {
-        return c;
+        return letter;
     }
     
 }
