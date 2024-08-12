@@ -10,19 +10,19 @@ spaces = height - 1
 
 print()
 
-for i in range(height):
+for counter in range(height):
 
-    for j in range(spaces):
+    for spacesCounter in range(spaces):
         print(" ", end="")
 
     spaces -= 1
 
-    for k in range(i + 1):
+    for leftPyramidCounter in range(counter + 1):
         print("#", end="")
 
     print("  ", end="")
 
-    for m in range(i + 1):
+    for rightPyramidCounter in range(counter + 1):
         print("#", end="")
 
     print()
