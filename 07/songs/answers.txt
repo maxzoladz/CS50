@@ -1,0 +1,9 @@
+I would look at the the average of each characteristic, and see if its above a
+certain value, for example 50
+
+Example Case: AVG(energy) = 80; AVG(valence) = 82; AVG(danceability) = 78
+
+I would conclude that this persons audio aura is very positive, energetic and 
+and as the danceability average is high, this person probably listens to party hits.
+
+If the averages would be low, I would conclude the opposite.
