@@ -38,16 +38,16 @@ int main(int argc, string argv[])
         printf("Maximum number of candidates is %i\n", MAX);
         return 2;
     }
-    for (int i = 0; i < candidate_count; i++)
+    for (int candidateIndex = 0; candidateIndex < candidate_count; candidateIndex++)
     {
-        candidates[i].name = argv[i + 1];
-        candidates[i].votes = 0;
+        candidates[candidateIndex].name = argv[candidateIndex + 1];
+        candidates[candidateIndex].votes = 0;
     }
 
     int voter_count = get_int("Number of voters: ");
 
     // Loop over all voters
-    for (int i = 0; i < voter_count; i++)
+    for (int candidateIndex = 0; candidateIndex < voter_count; candidateIndex++)
     {
         string name = get_string("Vote: ");
 
@@ -65,12 +65,14 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    for(int i = 0; i < candidate_count; i++) {
-        if(strcmp(name, candidates[i].name) == 0) {
-            candidates[i].votes++;
+    for(int candidateIndex = 0; candidateIndex < candidate_count; candidateIndex++) {
+        bool nameIsCandidate = strcmp(name, candidates[candidateIndex].name) == 0;
+        if(nameIsCandidate) {
+            candidates[candidateIndex].votes++;
             return true;
         }
     }
+
     return false;
 }
 
@@ -79,16 +81,17 @@ void print_winner(void)
 {
     int highestVotes = 0;
 
-    for(int i = 0; i < candidate_count; i++) {
-        if(candidates[i].votes > highestVotes) {
-            highestVotes = candidates[i].votes;
+    for(int candidateIndex = 0; candidateIndex < candidate_count; candidateIndex++) {
+        if(candidates[candidateIndex].votes > highestVotes) {
+            highestVotes = candidates[candidateIndex].votes;
         }
     }
 
-    for(int j = 0; j < candidate_count; j++) {
-        if(candidates[j].votes == highestVotes) {
-            printf("Winner: %s\n", candidates[j].name);
+    for(int candidateIndex = 0; candidateIndex < candidate_count; candidateIndex++) {
+        if(candidates[candidateIndex].votes == highestVotes) {
+            printf("Winner: %s\n", candidates[candidateIndex].name);
         }
     }
+
     return;
 }

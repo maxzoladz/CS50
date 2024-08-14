@@ -114,10 +114,9 @@ bool vote(int rank, string name, int ranks[])
 // Update preferences given one voter's ranks
 void record_preferences(int ranks[])
 {
-    for(int candidate_a = 0; candidate_a < candidate_count; candidate_a++) {
-
-        for(int candidate_b = candidate_a + 1; candidate_b < candidate_count; candidate_b++) {
-            preferences[ranks[candidate_a]][ranks[candidate_b]]++;
+    for(int rank_above = 0; rank_above < candidate_count; rank_above++) {
+        for(int rank_below = rank_above + 1; rank_below < candidate_count; rank_below++) {
+            preferences[ranks[rank_above]][ranks[rank_below]]++;
         }
     }
 
@@ -128,17 +127,13 @@ void record_preferences(int ranks[])
 void add_pairs(void)
 {
     for(int candidate_a = 0; candidate_a < candidate_count; candidate_a++) {
-
         for(int candidate_b = candidate_a + 1; candidate_b < candidate_count; candidate_b++) {
-
             if(preferences[candidate_a][candidate_b] > preferences[candidate_b][candidate_a]) {
-
                 pairs[pair_count].winner = candidate_a;
                 pairs[pair_count].loser = candidate_b;
                 pair_count++;
             }
             else if(preferences[candidate_a][candidate_b] < preferences[candidate_b][candidate_a]) {
-
                 pairs[pair_count].winner = candidate_b;
                 pairs[pair_count].loser = candidate_a;
                 pair_count++;
@@ -153,21 +148,14 @@ void add_pairs(void)
 void sort_pairs(void)
 {
     for(int outerCounter = 0; outerCounter < pair_count; outerCounter++) {
-
-        for(int innerCounter = outerCounter; innerCounter < pair_count; innerCounter++) {
-
+        for(int innerCounter = 0; innerCounter < pair_count - outerCounter; innerCounter++) {
             int strengthCurrentPair = preferences[pairs[innerCounter].winner][pairs[innerCounter].loser];
             int strengthNextPair = preferences[pairs[innerCounter + 1].winner][pairs[innerCounter + 1].loser];
 
             if(strengthCurrentPair < strengthNextPair) {
-
-                pair temporaryPair; temporaryPair.winner = pairs[innerCounter].winner; temporaryPair.loser = pairs[innerCounter].loser;
-
-                pairs[innerCounter].winner = pairs[innerCounter + 1].winner;
-                pairs[innerCounter].loser = pairs[innerCounter + 1].loser;
-
-                pairs[innerCounter + 1].winner = temporaryPair.winner;
-                pairs[innerCounter + 1].loser = temporaryPair.loser;
+                pair temporaryPair = pairs[innerCounter];
+                pairs[innerCounter] = pairs[innerCounter + 1];
+                pairs[innerCounter + 1] = temporaryPair;
             }
         }
     }
@@ -179,8 +167,9 @@ void sort_pairs(void)
 void lock_pairs(void)
 {
     for(int pairIndex = 0; pairIndex < pair_count; pairIndex++) {
+        bool cycleExists = isCycle(pairs[pairIndex].winner, pairs[pairIndex].loser);
 
-        if(isCycle(pairs[pairIndex].winner, pairs[pairIndex].loser) == false) {
+        if(!cycleExists) {
             locked[pairs[pairIndex].winner][pairs[pairIndex].loser] = true;
         }
     }
@@ -192,37 +181,32 @@ void lock_pairs(void)
 void print_winner(void)
 {
     for(int counter = 0; counter < candidate_count; counter++) {
-        
         bool winner = true;
 
         for(int innerCounter = 0; innerCounter < candidate_count; innerCounter++) {
-
-            if(locked[innerCounter][counter] == true){
+            if(locked[innerCounter][counter]){
                 winner = false;
                 break;
             }
         }
+
         if(winner == true) {
             printf("Winner: %s\n", candidates[counter]);
         }
         
     }
+
     return;
 }
 
 bool isCycle(int winner, int loser) {
-
     if(winner == loser) {
         return true;
     }
 
     for(int pairIndex = 0; pairIndex < candidate_count; pairIndex++){
-        
-        if(locked[loser][pairIndex] == true) {
-
-            if(isCycle(winner, pairIndex) == true) {
-                return true;
-            }
+        if(locked[loser][pairIndex]) {
+            if(isCycle(winner, pairIndex)) return true;
         }
     }
 
