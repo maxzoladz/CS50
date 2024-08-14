@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // Number of bytes in .wav header
 const int HEADER_SIZE = 44;
@@ -43,7 +44,8 @@ int main(int argc, char *argv[])
     // TODO: Read samples from input file and write updated data to output file
     u_int16_t buffer;
 
-    while(fread(&buffer, sizeof(buffer), 1, input) != 0) {
+    bool hasData = fread(&buffer, sizeof(buffer), 1, input) != 0;
+    while(hasData) {
         buffer *= factor;
 
         fwrite(&buffer, sizeof(buffer), 1, output);
