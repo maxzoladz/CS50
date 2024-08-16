@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <table class="table table-light mx-auto w-25">
+        <thead>
+            <tr>
+                <th scope="col">Stock</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
